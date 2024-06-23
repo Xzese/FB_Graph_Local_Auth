@@ -1,6 +1,6 @@
 # FB_Graph_Local_Auth
 
-This repository contains code to make an authentication server using the Facebook Graph API for local authentication on device. This functionality was originally part of the [Smart Display App](https://github.com/yourusername/Smart-Display-App), but has been moved into a standalone repository.
+This repository contains code to make an authentication server using the Facebook Graph API for local authentication on a device or local network. This functionality was originally part of the [Smart Display App](https://github.com/yourusername/Smart-Display-App), but has been moved into a standalone repository.
 
 ## Setting Up the Authentication Server
 
