@@ -8,11 +8,19 @@ import threading
 from flask import Flask, request
 from werkzeug.serving import make_server
 
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
-dotenv.load_dotenv()
-
 app = Flask(__name__)
+
+def load_env():
+    if __name__ == "__main__":
+        # Running as main, load .env from the current directory of the script
+        env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+    else:
+        # Running as imported module, load .env from the parent directory
+        env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env')
+    
+    dotenv.load_dotenv(env_path)
+
+load_env()
 
 token_acquired = threading.Event()
 token_thread = None
