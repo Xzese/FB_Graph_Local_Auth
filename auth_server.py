@@ -103,7 +103,7 @@ def wait_for_token():
     server.shutdown()
     server_thread.join()
 
-def native_capture(auth_url):
+def local_browser_capture(auth_url):
     global token_thread
     token_thread = threading.Thread(target=open_webbrowser, args=(auth_url,))
     token_thread.start()
@@ -114,5 +114,5 @@ def stop_server():
 
 if __name__ == "__main__":
     auth_url = get_auth_url()
-    native_capture(auth_url)
+    local_browser_capture(auth_url)
     wait_for_token()
