@@ -10,17 +10,15 @@ from werkzeug.serving import make_server
 
 app = Flask(__name__)
 
-def load_env():
+def get_env_path():
     if __name__ == "__main__":
         # Running as main, load .env from the current directory of the script
-        env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
     else:
         # Running as imported module, load .env from the parent directory
-        env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env')
+        return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env')
     
-    dotenv.load_dotenv(env_path)
-
-load_env()
+dotenv.load_dotenv(get_env_path())
 
 token_acquired = threading.Event()
 token_thread = None
@@ -76,13 +74,14 @@ def exchange_code_for_token(code):
             expiry_date = expiry_date.strftime('%Y-%m-%d %H:%M:%S.%f')
         os.environ['ACCESS_TOKEN'] = instagram_access_token
         os.environ['ACCESS_TOKEN_EXPIRY'] = str(expiry_date)
-        dotenv.set_key('.env',"ACCESS_TOKEN", instagram_access_token)
-        dotenv.set_key('.env',"ACCESS_TOKEN_EXPIRY", str(expiry_date))
+        dotenv.set_key(get_env_path(),"ACCESS_TOKEN", instagram_access_token)
+        dotenv.set_key(get_env_path(),"ACCESS_TOKEN_EXPIRY", str(expiry_date))
         return response.json()
     else:
         return 'Error: Failed to exchange authorization code for token'
 
 def run_server():
+    print(os.getenv('CLIENT_IP_ADDRESS'))
     server = make_server(os.getenv('CLIENT_IP_ADDRESS'), 5000, app, ssl_context="adhoc")
     server_thread = threading.Thread(target=server.serve_forever)
     server_thread.start()
