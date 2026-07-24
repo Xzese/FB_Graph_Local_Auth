@@ -27,7 +27,7 @@ This repository contains code to make an authentication server using the Faceboo
 2. Set the following environment variables in the `.env` file:
    - `APP_ID`: The App ID obtained from the Facebook Developer Dashboard.
    - `APP_SECRET`: The App Secret obtained from the Facebook Developer Dashboard.
-   - `CLIENT_TOKEN`: The Client Token obtained from the Facebook Developer Dashboard.
+   - `GRAPH_SCOPE`: Comma-separated Facebook permissions requested during OAuth (for example `instagram_basic,pages_show_list,business_management`).
    - `CLIENT_IP_ADDRESS`: The local IP address of the device where the application will run. This can be either `192.168.x.y`, `localhost`, or `127.0.0.1`.
 
 Ensure that the `.env` file contains these variables with their respective values before running the application. These variables are necessary for the application to communicate with the Facebook Graph API services.
